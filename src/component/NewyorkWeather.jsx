@@ -104,9 +104,9 @@ const NewyorkWeather = () => {
               </Typography>
 
               <Typography className={classes.typography} gutterBottom>
-                {temperature}&deg;c
+                {Math.ceil(temperature)}&deg;c
               </Typography>
-              <Typography>Feels Like: {feels}&deg;c</Typography>
+              <Typography>Feels Like: {Math.ceil(feels)}&deg;c</Typography>
 
               <Typography variant="h6">
                 <b>{desc}</b>
