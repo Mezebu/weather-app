@@ -19,7 +19,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <div className="App">
           <Container>
-            <div className="test">
+            <div className="contents">
               <div className="current-weather">
                 <CurrentWeather />
               </div>
