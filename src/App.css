@@ -1,38 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Montserrat", sans-serif;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+html {
+  font-size: 100%;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  background: #2193b0; /* fallback for old browsers */
+  background: url("../src/utils/bg-img.jpg");
+  background-size: cover;
 }
 
-.App-link {
-  color: #61dafb;
+.test {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 1050px) {
+  .new-york {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media only screen and (max-width: 992px) {
+  .moscow {
+    display: none;
+  }
+  .new-york {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .moscow {
+    display: none;
+  }
+  .new-york {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .new-york {
+    display: none;
+  }
+  .moscow {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .london {
+    display: none;
   }
 }

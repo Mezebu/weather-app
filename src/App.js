@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Container, ThemeProvider, createMuiTheme } from "@material-ui/core";
+import "bootstrap/dist/css/bootstrap.min.css";
+import CurrentWeather from "./component/CurrentWeather";
+import MoscowWeather from "./component/MoscowWeather";
+import LondonWeather from "./component/LondonWeather";
+import NewyorkWeather from "./component/NewyorkWeather";
+import "./App.css";
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: ["Montserrat", "sans-serif"].join(","),
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <Container>
+            <div className="test">
+              <div className="current-weather">
+                <CurrentWeather />
+              </div>
+              <div className="london">
+                <LondonWeather />
+              </div>
+              <div className="moscow">
+                <MoscowWeather />
+              </div>
+
+              <div className="new-york">
+                <NewyorkWeather />
+              </div>
+            </div>
+          </Container>
+        </div>
+      </ThemeProvider>
+    </>
   );
 }
 
