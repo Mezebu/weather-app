@@ -47,7 +47,7 @@ const CurrentWeather = () => {
         setLoading(false);
         setCountry(response.data.sys.country);
         setCity(response.data.name);
-        setDesc(response.data.weather[0].description);
+        setDesc(response.data.weather[0].main);
         setFeels(response.data.main.feels_like);
         setHumidity(response.data.main.humidity);
         setTemperature(response.data.main.temp);
@@ -75,7 +75,9 @@ const CurrentWeather = () => {
           WebkitBackdropFilter: "blur(3px)",
         }}
       >
-        <i class="bi bi-brightness-high" style={{ fontSize: 50 }}></i>
+        <div style={{ marginTop: 45 }}>
+          <i className="bi bi-brightness-high" style={{ fontSize: 50 }}></i>
+        </div>
 
         {loading ? (
           <div style={{ margin: "100px" }}>
@@ -85,11 +87,7 @@ const CurrentWeather = () => {
           <>
             <CardContent>
               <Typography variant="h4" gutterBottom>
-                {country}
-              </Typography>
-
-              <Typography variant="h3" gutterBottom>
-                {city}
+                {city}, {country}
               </Typography>
 
               <Typography>

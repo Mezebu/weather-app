@@ -2,9 +2,7 @@ import React from "react";
 import { Container, ThemeProvider, createMuiTheme } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CurrentWeather from "./component/CurrentWeather";
-import MoscowWeather from "./component/MoscowWeather";
-import LondonWeather from "./component/LondonWeather";
-import NewyorkWeather from "./component/NewyorkWeather";
+import SearchWeather from "./component/SearchWeather";
 import "./App.css";
 
 const theme = createMuiTheme({
@@ -23,15 +21,9 @@ function App() {
               <div className="current-weather">
                 <CurrentWeather />
               </div>
-              <div className="london">
-                <LondonWeather />
-              </div>
-              <div className="moscow">
-                <MoscowWeather />
-              </div>
 
-              <div className="new-york">
-                <NewyorkWeather />
+              <div className="moscow">
+                <SearchWeather />
               </div>
             </div>
           </Container>
