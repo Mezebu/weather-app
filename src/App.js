@@ -22,7 +22,7 @@ function App() {
                 <CurrentWeather />
               </div>
 
-              <div className="moscow">
+              <div className="search">
                 <SearchWeather />
               </div>
             </div>

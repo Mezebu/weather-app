@@ -11,11 +11,6 @@ import moment from "moment";
 import axios from "axios";
 
 const useStyles = makeStyles({
-  root: {
-    minWidth: 300,
-    minHeight: 500,
-  },
-
   pos: {
     marginBottom: 12,
   },
@@ -32,11 +27,12 @@ const SearchWeather = () => {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [desc, setDesc] = useState("");
-  const [sunrise, setSunrise] = useState("");
-  const [sunset, setSunset] = useState("");
   const [temperature, setTemperature] = useState("");
+  const [tempMin, setTempMin] = useState("");
+  const [tempMax, setTempMax] = useState("");
   const [feels, setFeels] = useState("");
   const [humidity, setHumidity] = useState("");
+  const [wind, setWind] = useState("");
   const [loading, setLoading] = useState(false);
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
@@ -53,11 +49,12 @@ const SearchWeather = () => {
         setCountry(response.data.sys.country);
         setCity(response.data.name);
         setDesc(response.data.weather[0].main);
-        setSunrise(response.data.sys.sunrise);
-        setSunset(response.data.sys.sunset);
         setTemperature(response.data.main.temp);
+        setTempMin(response.data.main.temp_min);
+        setTempMax(response.data.main.temp_max);
         setFeels(response.data.main.feels_like);
         setHumidity(response.data.main.humidity);
+        setWind(response.data.wind.speed);
         console.log(response);
       })
       .catch(function (error) {
@@ -73,7 +70,7 @@ const SearchWeather = () => {
   return (
     <>
       <Card
-        className={classes.root}
+        className="card"
         style={{
           background: "rgba( 255, 255, 255, 0.30 )",
           backdropFilter: "blur(3px)",
@@ -93,7 +90,7 @@ const SearchWeather = () => {
 
         {loading ? (
           <div style={{ margin: "100px" }}>
-            <CircularProgress />
+            <CircularProgress color="secondary" />
           </div>
         ) : (
           <>
@@ -104,15 +101,6 @@ const SearchWeather = () => {
 
               <Typography>
                 {moment().format("dddd")}, {moment().format("LL")}
-              </Typography>
-
-              <Typography gutterBottom>
-                Time:{" "}
-                {new Date().toLocaleString("ru-RU", {
-                  timeZone: "Europe/Moscow",
-                  timeStyle: "short",
-                  hourCycle: "h12",
-                })}
               </Typography>
 
               <Typography className={classes.typography} gutterBottom>
@@ -127,22 +115,14 @@ const SearchWeather = () => {
               <Typography>Humidity: {humidity}%</Typography>
 
               <Typography gutterBottom>
-                Sunrise:{" "}
-                {new Date(sunrise * 1000).toLocaleTimeString("en-GB", {
-                  timeZone: "Europe/London",
-                  timeStyle: "short",
-                  hourCycle: "h12",
-                })}
+                Min Temperature: {Math.ceil(tempMin)}&deg;c
               </Typography>
 
               <Typography gutterBottom>
-                Sunset:{" "}
-                {new Date(sunset * 1000).toLocaleTimeString("en-GB", {
-                  timeZone: "Europe/London",
-                  timeStyle: "short",
-                  hourCycle: "h12",
-                })}
+                Max Temperature: {Math.ceil(tempMax)}&deg;c
               </Typography>
+
+              <Typography gutterBottom>Wind: {Math.ceil(wind)} km/h</Typography>
             </CardContent>
           </>
         )}
