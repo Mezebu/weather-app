@@ -28,6 +28,8 @@ const CurrentWeather = () => {
   const [temperature, setTemperature] = useState("");
   const [tempMin, setTempMin] = useState("");
   const [tempMax, setTempMax] = useState("");
+  const [icon, setIcon] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const fetchData = (position) => {
@@ -49,10 +51,11 @@ const CurrentWeather = () => {
         setTemperature(response.data.main.temp);
         setTempMin(response.data.main.temp_min);
         setTempMax(response.data.main.temp_max);
+        setIcon(response.data.weather[0].icon);
         console.log(response);
       })
       .catch(function (error) {
-        // handle error
+        setError(error.message);
         console.log(error);
       });
   };
@@ -72,8 +75,10 @@ const CurrentWeather = () => {
         }}
       >
         <div style={{ marginTop: 45 }}>
-          <i className="bi bi-brightness-high" style={{ fontSize: 50 }}></i>
+          <i className="bi bi-brightness-high" style={{ fontSize: 51 }}></i>
         </div>
+
+        {error && <Typography>{error}</Typography>}
 
         {loading ? (
           <div style={{ margin: "100px" }}>
@@ -97,6 +102,11 @@ const CurrentWeather = () => {
 
               <Typography variant="h6">
                 <b>{desc}</b>
+                <img
+                  src={`http://openweathermap.org/img/wn/${icon}.png`}
+                  alt=""
+                  className="icon"
+                />
               </Typography>
               <Typography>Humidity: {humidity}%</Typography>
 

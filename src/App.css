@@ -49,11 +49,6 @@ body {
   min-height: 30rem;
 }
 
-.icon {
-  width: 25%;
-  height: 25%;
-}
-
 @media only screen and (max-width: 1050px) {
   .contents {
     display: flex;
