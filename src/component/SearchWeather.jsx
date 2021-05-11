@@ -33,6 +33,7 @@ const SearchWeather = () => {
   const [feels, setFeels] = useState("");
   const [humidity, setHumidity] = useState("");
   const [wind, setWind] = useState("");
+  const [icon, setIcon] = useState("");
   const [loading, setLoading] = useState(false);
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
@@ -55,6 +56,7 @@ const SearchWeather = () => {
         setFeels(response.data.main.feels_like);
         setHumidity(response.data.main.humidity);
         setWind(response.data.wind.speed);
+        setIcon(response.data.weather[0].icon);
         console.log(response);
       })
       .catch(function (error) {
@@ -86,7 +88,13 @@ const SearchWeather = () => {
           />
         </form>
 
-        <i className="bi bi-brightness-high" style={{ fontSize: 50 }}></i>
+        <div className="center-icon">
+          <img
+            src={`http://openweathermap.org/img/wn/${icon}.png`}
+            alt=""
+            className="icon"
+          />
+        </div>
 
         {loading ? (
           <div style={{ margin: "100px" }}>

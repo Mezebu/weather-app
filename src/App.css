@@ -45,8 +45,13 @@ body {
 }
 
 .card {
-  min-width: 19rem;
+  min-width: 20rem;
   min-height: 30rem;
+}
+
+.icon {
+  width: 25%;
+  height: 25%;
 }
 
 @media only screen and (max-width: 1050px) {
