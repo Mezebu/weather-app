@@ -44,6 +44,7 @@ const SearchWeather = () => {
     setLoading(true);
     setInput("");
     setError("");
+    setCity("");
 
     axios
       .get(url)
@@ -62,6 +63,7 @@ const SearchWeather = () => {
         console.log(response);
       })
       .catch((error) => {
+        setLoading(false);
         setError(error.response.data.message);
         console.log(error.response.data.message);
       });
@@ -97,11 +99,12 @@ const SearchWeather = () => {
 
         {error && <Typography>{error}</Typography>}
 
-        {loading ? (
+        {loading && (
           <div style={{ margin: "100px" }}>
             <CircularProgress />
           </div>
-        ) : (
+        )}
+        {city && (
           <>
             <CardContent>
               <Typography variant="h4" gutterBottom>
