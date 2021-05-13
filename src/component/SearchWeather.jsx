@@ -43,6 +43,7 @@ const SearchWeather = () => {
     e.preventDefault();
     setLoading(true);
     setInput("");
+    setError("");
 
     axios
       .get(url)
@@ -60,9 +61,9 @@ const SearchWeather = () => {
         setIcon(response.data.weather[0].icon);
         console.log(response);
       })
-      .catch(function (error) {
-        console.log(error);
-        setError(error.message);
+      .catch((error) => {
+        setError(error.response.data.message);
+        console.log(error.response.data.message);
       });
   };
 
@@ -98,7 +99,7 @@ const SearchWeather = () => {
 
         {loading ? (
           <div style={{ margin: "100px" }}>
-            <CircularProgress color="secondary" />
+            <CircularProgress />
           </div>
         ) : (
           <>
@@ -116,7 +117,14 @@ const SearchWeather = () => {
               </Typography>
               <Typography>Feels Like: {Math.ceil(feels)}&deg;c</Typography>
 
-              <Typography variant="h6">
+              <Typography
+                variant="h6"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <b>{desc}</b>
                 <img
                   src={`http://openweathermap.org/img/wn/${icon}.png`}

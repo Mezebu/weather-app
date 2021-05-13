@@ -45,8 +45,8 @@ body {
 }
 
 .card {
-  min-width: 20rem;
-  min-height: 30rem;
+  width: 20rem;
+  height: 32rem;
 }
 
 @media only screen and (max-width: 1050px) {

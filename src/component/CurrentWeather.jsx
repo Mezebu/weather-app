@@ -100,7 +100,14 @@ const CurrentWeather = () => {
               </Typography>
               <Typography>Feels Like: {Math.ceil(feels)}&deg;c</Typography>
 
-              <Typography variant="h6">
+              <Typography
+                variant="h6"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <b>{desc}</b>
                 <img
                   src={`http://openweathermap.org/img/wn/${icon}.png`}
