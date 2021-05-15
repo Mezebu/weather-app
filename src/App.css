@@ -28,6 +28,9 @@ html {
 
 body {
   background: url("../src/utils/bg-img.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
 }
 
@@ -58,6 +61,9 @@ body {
   .contents {
     display: flex;
     align-items: center;
+  }
+  .hd-text {
+    padding: 2rem 0;
   }
 }
 
@@ -90,6 +96,9 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+  .hd-text {
+    padding: 2rem 0;
   }
 }
 
