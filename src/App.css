@@ -44,15 +44,19 @@ body {
   align-items: center;
 }
 
+.hd-text {
+  color: white;
+  padding: 1rem 0;
+}
+
 .card {
   width: 20rem;
   height: 32rem;
 }
 
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-width: 1024px) {
   .contents {
     display: flex;
-    flex-direction: row;
     align-items: center;
   }
 }
@@ -86,6 +90,21 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hd-text {
+    padding: 0.5rem 0;
+  }
+  .search {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 }
 
