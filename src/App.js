@@ -24,7 +24,7 @@ function App() {
           <Container>
             <Typography
               variant="h4"
-              className="hd-text animate__animated animate__fadeInDown"
+              className="hd-text animate__animated animate__fadeInDown animate__delay-2s"
             >
               Today's Weather Forecast
             </Typography>
