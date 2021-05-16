@@ -108,7 +108,7 @@ const SearchWeather = () => {
           <>
             <CardContent>
               <Typography variant="h4" gutterBottom>
-                {city} {country}
+                {city}, {country}
               </Typography>
 
               <Typography>
@@ -130,7 +130,7 @@ const SearchWeather = () => {
               >
                 <b>{desc}</b>
                 <img
-                  src={`http://openweathermap.org/img/wn/${icon}.png`}
+                  src={`https://openweathermap.org/img/wn/${icon}.png`}
                   alt=""
                   className="icon"
                 />
