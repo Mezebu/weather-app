@@ -33,7 +33,7 @@ function App() {
                 <CurrentWeather />
               </div>
 
-              <div>
+              <div className="search">
                 <SearchWeather />
               </div>
             </div>
