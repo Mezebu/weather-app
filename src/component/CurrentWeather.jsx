@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, makeStyles, Typography } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import moment from "moment";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Card,
+  CardContent,
+  makeStyles,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
-  pos: {
-    marginBottom: 12,
+  root: {
+    background: "rgba( 255, 255, 255, 0.30 )",
+    backdropFilter: "blur(3px)",
+    WebkitBackdropFilter: "blur(3px)",
+    width: "20rem",
+    height: "32rem",
   },
   typography: {
     fontSize: 40,
@@ -18,24 +26,23 @@ const useStyles = makeStyles({
 const CurrentWeather = () => {
   const classes = useStyles();
 
-  const [lat, setLat] = useState([]);
-  const [lon, setLon] = useState([]);
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
-  const [desc, setDesc] = useState("");
-  const [feels, setFeels] = useState("");
-  const [humidity, setHumidity] = useState("");
-  const [temperature, setTemperature] = useState("");
-  const [tempMin, setTempMin] = useState("");
-  const [tempMax, setTempMax] = useState("");
-  const [icon, setIcon] = useState("");
-  const [error, setError] = useState("");
+  const [data, setData] = useState({});
+  const [coords, setCoords] = useState({});
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const { main = {}, sys = {}, weather = [], name: city, id } = data;
+  const { feels_like, humidity, temp, temp_min, temp_max } = main;
+  const { icon, main: description } = weather[0] || {};
+  const { lat, lon } = coords;
+  const { country } = sys;
 
   const fetchData = (position) => {
     setLoading(true);
-    setLon(position.coords.longitude);
-    setLat(position.coords.latitude);
+    setCoords(position.coords);
+    setError("");
+    setCoords({});
+    setData({});
 
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
 
@@ -43,20 +50,13 @@ const CurrentWeather = () => {
       .get(url)
       .then((response) => {
         setLoading(false);
-        setCountry(response.data.sys.country);
-        setCity(response.data.name);
-        setDesc(response.data.weather[0].main);
-        setFeels(response.data.main.feels_like);
-        setHumidity(response.data.main.humidity);
-        setTemperature(response.data.main.temp);
-        setTempMin(response.data.main.temp_min);
-        setTempMax(response.data.main.temp_max);
-        setIcon(response.data.weather[0].icon);
+        setData(response.data);
         console.log(response);
       })
       .catch(function (error) {
-        setError(error.message);
-        console.log(error);
+        setLoading(false);
+        setError(error.response.data.message);
+        console.log(error.response.data.message);
       });
   };
 
@@ -66,25 +66,17 @@ const CurrentWeather = () => {
 
   return (
     <>
-      <Card
-        className="card"
-        style={{
-          background: "rgba( 255, 255, 255, 0.30 )",
-          backdropFilter: "blur(3px)",
-          WebkitBackdropFilter: "blur(3px)",
-        }}
-      >
+      <Card className={classes.root}>
         <div style={{ marginTop: 45 }}>
           <i className="bi bi-brightness-high" style={{ fontSize: 51 }}></i>
         </div>
-
         {error && <Typography>{error}</Typography>}
-
-        {loading ? (
+        {loading && (
           <div style={{ margin: "100px" }}>
-            <CircularProgress />
+            <CircularProgress color="secondary" />
           </div>
-        ) : (
+        )}
+        {id && (
           <>
             <CardContent>
               <Typography variant="h4" gutterBottom>
@@ -96,9 +88,9 @@ const CurrentWeather = () => {
               </Typography>
 
               <Typography className={classes.typography} gutterBottom>
-                {Math.ceil(temperature)}&deg;c
+                {Math.ceil(temp)}&deg;c
               </Typography>
-              <Typography>Feels Like: {Math.ceil(feels)}&deg;c</Typography>
+              <Typography>Feels Like: {Math.ceil(feels_like)}&deg;c</Typography>
 
               <Typography
                 variant="h6"
@@ -108,7 +100,7 @@ const CurrentWeather = () => {
                   justifyContent: "center",
                 }}
               >
-                <b>{desc}</b>
+                <b>{description}</b>
                 <img
                   src={`http://openweathermap.org/img/wn/${icon}.png`}
                   alt=""
@@ -118,11 +110,11 @@ const CurrentWeather = () => {
               <Typography>Humidity: {humidity}%</Typography>
 
               <Typography gutterBottom>
-                Min Temperature: {Math.ceil(tempMin)}&deg;c
+                Min Temperature: {Math.ceil(temp_min)}&deg;c
               </Typography>
 
               <Typography gutterBottom>
-                Max Temperature: {Math.ceil(tempMax)}&deg;c
+                Max Temperature: {Math.ceil(temp_max)}&deg;c
               </Typography>
 
               <Typography gutterBottom>

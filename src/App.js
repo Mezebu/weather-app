@@ -29,11 +29,11 @@ function App() {
               Today's Weather Forecast
             </Typography>
             <div className="contents">
-              <div className="current-weather">
+              <div>
                 <CurrentWeather />
               </div>
 
-              <div className="search">
+              <div>
                 <SearchWeather />
               </div>
             </div>

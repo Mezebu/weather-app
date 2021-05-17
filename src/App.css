@@ -27,7 +27,7 @@ html {
 }
 
 body {
-  background: url("../src/utils/bg-img.jpg");
+  background: url("./utils/bg-img.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -50,11 +50,6 @@ body {
 .hd-text {
   color: white;
   padding: 1rem 0;
-}
-
-.card {
-  width: 20rem;
-  height: 32rem;
 }
 
 @media only screen and (max-width: 1024px) {

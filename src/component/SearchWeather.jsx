@@ -1,18 +1,22 @@
 import React, { useState } from "react";
+import moment from "moment";
+import axios from "axios";
 import {
   Card,
   makeStyles,
   Typography,
   CardContent,
   TextField,
+  CircularProgress,
 } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import moment from "moment";
-import axios from "axios";
 
 const useStyles = makeStyles({
-  pos: {
-    marginBottom: 12,
+  root: {
+    background: "rgba( 255, 255, 255, 0.30 )",
+    backdropFilter: "blur(3px)",
+    WebkitBackdropFilter: "blur(3px)",
+    width: "20rem",
+    height: "32rem",
   },
   typography: {
     fontSize: 40,
@@ -23,43 +27,31 @@ const useStyles = makeStyles({
 const SearchWeather = () => {
   const classes = useStyles();
 
-  const [input, setInput] = useState("");
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
-  const [desc, setDesc] = useState("");
-  const [temperature, setTemperature] = useState("");
-  const [tempMin, setTempMin] = useState("");
-  const [tempMax, setTempMax] = useState("");
-  const [feels, setFeels] = useState("");
-  const [humidity, setHumidity] = useState("");
-  const [wind, setWind] = useState("");
-  const [icon, setIcon] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const [data, setData] = useState({});
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
+  const { main = {}, wind = {}, sys = {}, weather = [], id, name: city } = data;
+  const { feels_like, temp_max, temp_min, humidity, temp } = main;
+  const { icon, main: description } = weather[0] || {};
+  const { country } = sys;
+  const { speed } = wind;
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
 
   const submitHandler = (e) => {
     e.preventDefault();
     setLoading(true);
-    setInput("");
+    setQuery("");
     setError("");
-    setCity("");
+    setData({});
 
     axios
       .get(url)
       .then((response) => {
         setLoading(false);
-        setCountry(response.data.sys.country);
-        setCity(response.data.name);
-        setDesc(response.data.weather[0].main);
-        setTemperature(response.data.main.temp);
-        setTempMin(response.data.main.temp_min);
-        setTempMax(response.data.main.temp_max);
-        setFeels(response.data.main.feels_like);
-        setHumidity(response.data.main.humidity);
-        setWind(response.data.wind.speed);
-        setIcon(response.data.weather[0].icon);
+        setData(response.data);
         console.log(response);
       })
       .catch((error) => {
@@ -71,24 +63,17 @@ const SearchWeather = () => {
 
   const inputHandler = (e) => {
     const value = e.target.value;
-    setInput(value);
+    setQuery(value);
   };
 
   return (
     <>
-      <Card
-        className="card"
-        style={{
-          background: "rgba( 255, 255, 255, 0.30 )",
-          backdropFilter: "blur(3px)",
-          WebkitBackdropFilter: "blur(3px)",
-        }}
-      >
+      <Card className={classes.root}>
         <form onSubmit={submitHandler}>
           <TextField
             id="standard-basic"
             label="Search city..."
-            value={input}
+            value={query}
             onChange={inputHandler}
           />
         </form>
@@ -101,10 +86,10 @@ const SearchWeather = () => {
 
         {loading && (
           <div style={{ margin: "100px" }}>
-            <CircularProgress />
+            <CircularProgress color="secondary" />
           </div>
         )}
-        {city && (
+        {id && (
           <>
             <CardContent>
               <Typography variant="h4" gutterBottom>
@@ -116,9 +101,9 @@ const SearchWeather = () => {
               </Typography>
 
               <Typography className={classes.typography} gutterBottom>
-                {Math.ceil(temperature)}&deg;c
+                {Math.ceil(temp)}&deg;c
               </Typography>
-              <Typography>Feels Like: {Math.ceil(feels)}&deg;c</Typography>
+              <Typography>Feels Like: {Math.ceil(feels_like)}&deg;c</Typography>
 
               <Typography
                 variant="h6"
@@ -128,7 +113,7 @@ const SearchWeather = () => {
                   justifyContent: "center",
                 }}
               >
-                <b>{desc}</b>
+                <b>{description}</b>
                 <img
                   src={`http://openweathermap.org/img/wn/${icon}.png`}
                   alt=""
@@ -139,14 +124,16 @@ const SearchWeather = () => {
               <Typography>Humidity: {humidity}%</Typography>
 
               <Typography gutterBottom>
-                Min Temperature: {Math.ceil(tempMin)}&deg;c
+                Min Temperature: {Math.ceil(temp_min)}&deg;c
               </Typography>
 
               <Typography gutterBottom>
-                Max Temperature: {Math.ceil(tempMax)}&deg;c
+                Max Temperature: {Math.ceil(temp_max)}&deg;c
               </Typography>
 
-              <Typography gutterBottom>Wind: {Math.ceil(wind)} km/h</Typography>
+              <Typography gutterBottom>
+                Wind: {Math.ceil(speed)} km/h
+              </Typography>
             </CardContent>
           </>
         )}
