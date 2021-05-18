@@ -79,10 +79,7 @@ const SearchWeather = () => {
         </form>
 
         <div>
-          <img
-            src={`${process.env.REACT_APP_ICON_URL}/${icon}@2x.png`}
-            alt=""
-          />
+          <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
         </div>
 
         {error && <Typography>{error}</Typography>}
