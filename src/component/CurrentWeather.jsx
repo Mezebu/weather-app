@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     backdropFilter: "blur(3px)",
     WebkitBackdropFilter: "blur(3px)",
     width: "20rem",
-    height: "32rem",
+    height: "33rem",
   },
   typography: {
     fontSize: 40,
@@ -44,10 +44,10 @@ const CurrentWeather = () => {
     setCoords({});
     setData({});
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
-
     axios
-      .get(url)
+      .get(
+        `${process.env.REACT_APP_API_URL}/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
+      )
       .then((response) => {
         setLoading(false);
         setData(response.data);
@@ -67,8 +67,12 @@ const CurrentWeather = () => {
   return (
     <>
       <Card className={classes.root}>
-        <div style={{ marginTop: 45 }}>
-          <i className="bi bi-brightness-high" style={{ fontSize: 51 }}></i>
+        <div style={{ marginTop: 44 }}>
+          <img
+            src={`${process.env.REACT_APP_ICON_URL}/${icon}@2x.png`}
+            alt=""
+            className="icon"
+          />
         </div>
         {error && <Typography>{error}</Typography>}
         {loading && (
@@ -92,20 +96,8 @@ const CurrentWeather = () => {
               </Typography>
               <Typography>Feels Like: {Math.ceil(feels_like)}&deg;c</Typography>
 
-              <Typography
-                variant="h6"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <Typography variant="h6">
                 <b>{description}</b>
-                <img
-                  src={`http://openweathermap.org/img/wn/${icon}.png`}
-                  alt=""
-                  className="icon"
-                />
               </Typography>
               <Typography>Humidity: {humidity}%</Typography>
 

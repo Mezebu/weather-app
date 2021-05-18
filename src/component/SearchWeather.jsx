@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     backdropFilter: "blur(3px)",
     WebkitBackdropFilter: "blur(3px)",
     width: "20rem",
-    height: "32rem",
+    height: "33rem",
   },
   typography: {
     fontSize: 40,
@@ -79,7 +79,11 @@ const SearchWeather = () => {
         </form>
 
         <div>
-          <i className="bi bi-brightness-high" style={{ fontSize: 50 }}></i>
+          <img
+            src={`${process.env.REACT_APP_ICON_URL}/${icon}@2x.png`}
+            alt=""
+            className="icon"
+          />
         </div>
 
         {error && <Typography>{error}</Typography>}
@@ -105,20 +109,8 @@ const SearchWeather = () => {
               </Typography>
               <Typography>Feels Like: {Math.ceil(feels_like)}&deg;c</Typography>
 
-              <Typography
-                variant="h6"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+              <Typography variant="h6">
                 <b>{description}</b>
-                <img
-                  src={`http://openweathermap.org/img/wn/${icon}.png`}
-                  alt=""
-                  className="icon"
-                />
               </Typography>
 
               <Typography>Humidity: {humidity}%</Typography>
