@@ -38,8 +38,6 @@ const SearchWeather = () => {
   const { country } = sys;
   const { speed } = wind;
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
-
   const submitHandler = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -48,7 +46,9 @@ const SearchWeather = () => {
     setData({});
 
     axios
-      .get(url)
+      .get(
+        `${process.env.REACT_APP_API_URL}/weather?q=${query}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
+      )
       .then((response) => {
         setLoading(false);
         setData(response.data);
