@@ -71,7 +71,6 @@ const CurrentWeather = () => {
           <img
             src={`${process.env.REACT_APP_ICON_URL}/${icon}@2x.png`}
             alt=""
-            className="icon"
           />
         </div>
         {error && <Typography>{error}</Typography>}
