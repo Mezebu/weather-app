@@ -38,6 +38,8 @@ const CurrentWeather = () => {
   const { country } = sys;
 
   const fetchData = (position) => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
+
     setLoading(true);
     setCoords(position.coords);
     setError("");
@@ -45,9 +47,7 @@ const CurrentWeather = () => {
     setData({});
 
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
-      )
+      .get(url)
       .then((response) => {
         setLoading(false);
         setData(response.data);
@@ -67,7 +67,7 @@ const CurrentWeather = () => {
   return (
     <>
       <Card className={classes.root}>
-        <div style={{ marginTop: 44 }}>
+        <div style={{ marginTop: 45 }}>
           <img
             src={`${process.env.REACT_APP_ICON_URL}/${icon}@2x.png`}
             alt=""
