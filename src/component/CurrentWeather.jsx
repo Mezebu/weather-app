@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     backdropFilter: "blur(3px)",
     WebkitBackdropFilter: "blur(3px)",
     width: "20rem",
-    height: "33rem",
+    height: "32rem",
   },
   typography: {
     fontSize: 40,
