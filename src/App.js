@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import CurrentWeather from "./component/CurrentWeather";
 import SearchWeather from "./component/SearchWeather";
 import "./App.css";

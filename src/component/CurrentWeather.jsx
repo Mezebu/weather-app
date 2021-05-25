@@ -51,12 +51,10 @@ const CurrentWeather = () => {
       .then((response) => {
         setLoading(false);
         setData(response.data);
-        console.log(response);
       })
       .catch(function (error) {
         setLoading(false);
         setError(error.response.data.message);
-        console.log(error.response.data.message);
       });
   };
 

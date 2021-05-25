@@ -52,12 +52,10 @@ const SearchWeather = () => {
       .then((response) => {
         setLoading(false);
         setData(response.data);
-        console.log(response);
       })
       .catch((error) => {
         setLoading(false);
         setError(error.response.data.message);
-        console.log(error.response.data.message);
       });
   };
 
