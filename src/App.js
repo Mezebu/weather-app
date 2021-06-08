@@ -23,14 +23,14 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <div className="App">
-          <Container>
+          <Container maxWidth="md">
             <Typography
               variant="h4"
               className="hd-text animate__animated animate__fadeInDown animate__delay-2s"
             >
               Today's Weather Forecast
             </Typography>
-            <Grid container spacing={1} maxWidth="sm">
+            <Grid container spacing={1}>
               <Grid item xs={12} sm={6} md={6} className="contents">
                 <CurrentWeather />
               </Grid>
