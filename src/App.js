@@ -4,6 +4,7 @@ import {
   ThemeProvider,
   createMuiTheme,
   Typography,
+  Grid,
 } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -29,15 +30,14 @@ function App() {
             >
               Today's Weather Forecast
             </Typography>
-            <div className="contents">
-              <div>
+            <Grid container spacing={1} maxWidth="sm">
+              <Grid item xs={12} sm={6} md={6} className="contents">
                 <CurrentWeather />
-              </div>
-
-              <div className="search">
+              </Grid>
+              <Grid item xs={12} sm={6} md={6} className="contents">
                 <SearchWeather />
-              </div>
-            </div>
+              </Grid>
+            </Grid>
           </Container>
         </div>
       </ThemeProvider>
