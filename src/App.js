@@ -8,8 +8,8 @@ import {
 } from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import CurrentWeather from "./component/CurrentWeather";
-import SearchWeather from "./component/SearchWeather";
+import CurrentWeather from "./component/currentWeather/CurrentWeather";
+import SearchWeather from "./component/searchWeather/SearchWeather";
 import "./App.css";
 
 const theme = createMuiTheme({

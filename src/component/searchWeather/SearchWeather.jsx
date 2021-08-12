@@ -1,28 +1,10 @@
 import React, { useState } from "react";
 import moment from "moment";
 import axios from "axios";
-import {
-  Card,
-  makeStyles,
-  Typography,
-  CardContent,
-  TextField,
-  CircularProgress,
-} from "@material-ui/core";
+//prettier-ignore
+import { Card, Typography, CardContent, TextField, CircularProgress, } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  root: {
-    background: "rgba( 255, 255, 255, 0.30 )",
-    backdropFilter: "blur(3px)",
-    WebkitBackdropFilter: "blur(3px)",
-    width: "20rem",
-    height: "32rem",
-  },
-  typography: {
-    fontSize: 40,
-    fontWeight: 700,
-  },
-});
+import { useStyles } from "./styles";
 
 const SearchWeather = () => {
   const classes = useStyles();
