@@ -1,11 +1,6 @@
 import React from "react";
-import {
-  Container,
-  ThemeProvider,
-  createMuiTheme,
-  Typography,
-  Grid,
-} from "@material-ui/core";
+// prettier-ignore
+import { Container, ThemeProvider, createMuiTheme, Typography, Grid,} from "@material-ui/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import CurrentWeather from "./component/currentWeather/CurrentWeather";

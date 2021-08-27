@@ -22,23 +22,22 @@ const SearchWeather = () => {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setQuery("");
-    setError("");
-    setData({});
+  const submitHandler = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      setQuery("");
+      setError("");
+      setData({});
 
-    axios
-      .get(url)
-      .then((response) => {
-        setLoading(false);
-        setData(response.data);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error.response.data.message);
-      });
+      const { data } = await axios.get(url);
+
+      setLoading(false);
+      setData(data);
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
+    }
   };
 
   const inputHandler = (e) => {
