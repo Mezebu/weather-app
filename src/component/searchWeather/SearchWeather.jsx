@@ -22,7 +22,7 @@ const SearchWeather = () => {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
 
-  const submitHandler = async (e) => {
+  const getWeatherData = async (e) => {
     try {
       e.preventDefault();
       setLoading(true);
@@ -48,7 +48,7 @@ const SearchWeather = () => {
   return (
     <>
       <Card className={classes.root}>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={getWeatherData}>
           <TextField
             id="standard-basic"
             label="Search city..."
