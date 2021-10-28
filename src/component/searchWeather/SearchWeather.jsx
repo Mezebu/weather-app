@@ -8,7 +8,6 @@ import { useStyles } from "./styles";
 
 const SearchWeather = () => {
   const classes = useStyles();
-  const apiKey = process.env.REACT_APP_OPEN_WEATHER_KEY;
 
   const [query, setQuery] = useState("");
   const [data, setData] = useState({});
@@ -21,7 +20,7 @@ const SearchWeather = () => {
   const { country } = sys;
   const { speed } = wind;
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${apiKey}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=6695312a562194eb90b6350b28b39779`;
 
   const getWeatherData = async (e) => {
     try {
