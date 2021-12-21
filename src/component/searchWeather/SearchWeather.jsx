@@ -40,11 +40,6 @@ const SearchWeather = () => {
     }
   };
 
-  const inputHandler = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-  };
-
   return (
     <>
       <Card className={classes.root}>
@@ -53,7 +48,7 @@ const SearchWeather = () => {
             id="standard-basic"
             label="Search city..."
             value={query}
-            onChange={inputHandler}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </form>
 
